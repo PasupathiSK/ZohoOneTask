@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Grand child</title>
+
+
+<script>
+	/* var grand = {
+		Ram : [ "Ravi", "Sita" ],
+		Ravi : [ "Siva", "Raghu" ],
+		Siva : [ "Sam" ],
+		Raghu : [ "Tom" ],
+		Tom : [ "Jerry" ],
+		Sita : [ "Sethu" ]
+	}
+ */
+	var name = 'Ram';
+
+	
+	var grand = {};
+
+	function findGrand() {
+		var container = [];
+		var flag = false;
+		var check=false;
+		var result = "";
+
+		var name = document.getElementById("name1").value;
+		/* document.write(name); */
+		for ( const x in grand) {
+
+			if (x == name) {
+				container = grand[x];
+				flag = true;
+			}
+		}
+
+		var count = 0;
+		var length = container.length;
+	
+	for(var i=0;i<length;i++){
+			if(grand[container[i]]){
+			count = count + grand[container[i]].length;
+			result = result + grand[container[i]];
+			check=true;
+			}
+	}
+		
+
+var userShow=document.getElementById("show");
+		if (flag) {
+			if(count!=0){
+			userShow.innerHTML="count : "+count+"<br><b> Grand Children are : </b>" + result;
+			result="";
+			count=0;
+			}
+			else {
+				userShow.innerHTML="<p>You don't have a grand child</p>";
+			}
+		
+		} 
+		else {
+			userShow.innerHTML="<p>You are not a member of family</p>";
+		}
+	}
+	
+
+	/* function createTable(pair){
+	 var box=document.createElement("table");
+	 box.setAttribute("id","myTable");
+	 var tableBody=document.createElement("tbody");
+	 for(var i=0;i<pair;i++){
+	 var row=document.createElement("tr");
+	 for(var j=0;j<2;j++){
+	 var col=document.createElement("td");
+	 var field=document.createElement("input");
+	 field.setAttribute("type","text");
+	 field.setAttribute("value","ram");
+	 if(j==0){
+	 field.setAttribute("class","parent");
+	 field.setAttribute("placeholder","Parent");
+	 }
+	 else{
+	 field.setAttribute("class","child");
+	 field.setAttribute("placeholder","Child");
+	 } 
+	
+	 col.append(field);
+	 row.append(col);
+	 }
+	 tableBody.append(row);
+	 }
+	 box.append(tableBody);
+	 document.body.appendChild(box);
+	 }
+	 */
+	function newDiv(pair) {
+		var newPair = document.getElementsByClassName("newPair");
+		for (var i = 0; i < pair; i++) {
+			var box = document.createElement("div");
+			box.setAttribute("style","padding:10px 10px")
+			var firstCell = document.createElement("input");
+			var secondCell = document.createElement("input");
+			firstCell.setAttribute("type", "text");
+			firstCell.setAttribute("placeholder", "parent");
+			/* firstCell.setAttribute("value","ram");
+			secondCell.setAttribute("value","sita"); */
+			firstCell.setAttribute("class","parent");
+			secondCell.setAttribute("type", "text");
+			secondCell.setAttribute("placeholder", "child");
+			secondCell.setAttribute("class","child");
+			box.append(firstCell);
+			box.append(secondCell);
+			newPair[0].append(box);
+		}
+
+	}
+	function addParent() {
+		var parentElements = [];
+		var childElements = [];
+		parentElements=document.getElementsByClassName("parent");
+		childElements=document.getElementsByClassName("child");
+		
+		var pairLength = parentElements.length;
+		var childLength=childElements.length;
+
+
+		for(var i=0;i<pairLength;i++){
+			if(grand[parentElements[i].value]){
+				grand[parentElements[i].value].push(childElements[i].value);
+			}
+			else{
+			grand[parentElements[i].value]=[childElements[i].value];
+			}
+			
+		}
+
+	}
+</script>
+</head>
+<body>
+<div style="margin:auto;">
+	<div class="newPair" style="padding:20px 30px;">
+		<input type="number" value="" id="pair"> <input type="button"
+			onclick="newDiv(document.getElementById('pair').value)" value="Enter">
+	</div>
+	<input type="button" onclick="addParent()" value="Add" style="padding:10px 10px;">
+	<div style="padding:20px 20px;">
+	<input type="text" id="name1" value="">
+	<input type="button" onclick="findGrand()" value="find" />
+	<div id="show"></div>
+	</div>
+	</div>
+</body>
+</html>

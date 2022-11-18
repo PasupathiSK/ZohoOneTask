@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo Test</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--<script src="javascript/myScript.js"></script> -->
+<script>
+$(document).ready(function(){
+	
+	$("#updateUserName").submit(function(){
+
+		$.ajax({
+			url:'update',
+			type:'POST',
+			dataType:'json',
+			data:$("#updateUserName").serialize(),
+			success:function(data){
+				
+				if(data.isValid){
+					$("#result").html("Result is : "+data.myName);
+					$("#result").append("Valid User : "+data.isValid);
+				}
+				else{
+					 alert("Invalid");
+				}
+			}
+		});
+		return false;
+	});
+});
+</script>
+</head>
+<body>
+<h1>value</h1>
+<form id="updateUserName">
+Name:<input type="text" value="" name="name" id="myName">
+<input type="submit" >
+</form>
+<p id="result">hi</p>
+</body>
+</html>

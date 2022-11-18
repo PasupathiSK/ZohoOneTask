@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="form-to-json.js"></script>
+   <link rel="stylesheet" href="form-to-json.css" type="text/css">
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$("#btn").click(function(){
+		
+		var name=$("#myname").val();
+		var passcode=$("#mypassword").val();
+		
+		
+		$.ajax({
+				type:'POST',
+				data:{name:name,
+					passcode:passcode},
+				url:'AjaxController',
+				success:function(result){
+					$("body").append("first");
+					  $("#result").html(result);
+					  $('#myForm').formToJson('#result-json-output');
+				}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<h1>value</h1>
+
+<form id="#myform">
+Name:<input type="text" value="" id="myname">
+Password:<input type="password" value="" id="mypassword">
+<button type="button" id="btn">Enter</button>
+<div id="result">Hi :
+<p id="result-json-output">value</p>
+</div>
+</form>
+</body>
+</html>

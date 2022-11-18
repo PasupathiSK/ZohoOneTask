@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Task</title>
+
+
+</head>
+
+<body>
+
+
+<h1>find GrandChildren</h1>
+
+<script>
+
+const myUsers = [
+    { father: 'ram', child: 'ravi' },
+    { father: 'ravi', child: 'siva' },
+    { father: 'siva', child: 'sam' },
+    { father: 'ravi', child: 'raghu' },
+    { father: 'raghu', child: 'tom' },
+    { father: 'tom', child: 'jerry' },
+    { father: 'ram', child: 'sita' },
+    {father:'sita',child:'sethu'}
+];
+
+var container=[];
+
+var count=0;
+var flag=false;
+
+
+function msg(){
+	
+	var name=document.getElementById("name1").value;
+	var children="";
+for(const x in myUsers){
+	
+	if(myUsers[x].father==name){
+		var child=myUsers[x].child;
+		flag=true;
+		for(const y in myUsers){
+			
+			if(myUsers[y].father==child){
+				children+=child+" ";
+				count++;
+			}
+		}
+	}
+}
+if(flag==true){
+	document.write("GrandFather Name : "+name+"<br>");
+	document.write("Grand Children : "+children);
+document.writeln("<br>count : "+count);
+}
+else{
+	document.writeln(name+" is not a person in family ")
+}
+
+
+}
+
+
+</script>
+<input type="text" id="name1" value="">
+<input type="button" onclick="msg()" value="call function"/> 
+</body>
+
+
+</html>
+

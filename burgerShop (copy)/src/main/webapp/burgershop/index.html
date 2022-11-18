@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- css bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+	crossorigin="anonymous">
+<!-- end -->
+
+<script src="myScript.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	$("#burgerOfTheDay").click(function(){
+		$("#non-veg").hide();
+		$("#veg").hide();
+		$("#ownContent").hide();
+		$("#ownContentVeg").hide();
+		$("#test").html(checkFunction());
+		$("#test").show();
+		$("#burger").show();
+	});
+	$("#ownBurger").click(function(){
+		$("#test").hide();
+		$("#burger").hide();
+		$("#ownContent").hide();
+		$("#ownContentVeg").hide();
+		$("#non-veg").toggle();
+		$("#veg").toggle();
+		
+		$("#non-veg").click(function(){
+			$("#test").hide();
+			$("#burger").hide();
+			$("#ownContentVeg").hide();
+			$("#ownContent").toggle();
+		})
+		
+		$("#veg").click(function(){
+			$("#test").hide();
+			$("#burger").hide();
+			$("#ownContent").hide();
+			$("#ownContentVeg").toggle();
+		});
+		
+		$("#order").click(function(){
+		var crustItem=$("#crust option:selected").val();
+		/* $("body").append(crustItem); */
+		
+		var fillingItem=$("#filling option:selected").val();
+		/* $("body").append(fillingItem); */
+		
+		var checkedArray=[];
+		
+		$("input:checkbox[name=checkType]:checked").each(function(){
+			checkedArray.push($(this).val());
+			/* $("body").append($(this).val()); */
+		})
+		
+		$("#crust").change(function(){
+		crustItem=$("#crust option:selected").val();
+	/* 	$("body").append(crustItem); */
+		});
+		
+		$("#filling").change(function(){
+			fillingItem=$("#filling option:selected").val();
+			/* $("body").append(fillingItem); */
+		})
+	 
+		$(".checkControl:input:checkbox").each(function(index){
+			this.checked=(".checkControl:input:checkbox"<3);
+		}).change(function(){
+			if($(".checkControl:input:checkbox:checked").length>3){
+				this.checked=false;
+			}
+		}); 
+		$("#test").html(ownBurgeer(crustItem,fillingItem,checkedArray));
+		$("#test").show();
+		$("#burger").show();
+		});
+		
+		
+		$("#orderVeg").click(function(){
+			var crustItem=$("#crust option:selected").val();
+			/* $("body").append(crustItem); */
+			
+			var fillingItem=$("#filling option:selected").val();
+			/* $("body").append(fillingItem); */
+			
+			var checkedArray=[];
+			
+			$("input:checkbox[name=checkType]:checked").each(function(){
+				checkedArray.push($(this).val());
+				/* $("body").append($(this).val()); */
+			})
+			
+			$("#crust").change(function(){
+			crustItem=$("#crust option:selected").val();
+			/* $("body").append(crustItem); */
+			});
+			
+			$("#filling").change(function(){
+				fillingItem=$("#filling option:selected").val();
+				/* $("body").append(fillingItem); */
+			})
+			
+			 $(".checkControl:input:checkbox").each(function(index){
+				this.checked=(".checkControl:input:checkbox"<3);
+			}).change(function(){
+				if($(".checkControl:input:checkbox:checked").length>3){
+					this.checked=false;
+				} 
+			})
+ 			$("#test").html(ownBurgeer(crustItem,fillingItem,checkedArray));
+			$("#test").show();
+			$("#burger").show();
+			});
+	});
+});
+</script>
+<meta charset="UTF-8">
+<title>BLINKSHOP</title>
+</head>
+<body style="background-color:#E7E9EB;">
+<div class="container">
+<h1>BLINK SHOP</h1>
+<div>
+<table class="table table-dark table-striped bright">
+<tr>
+<th>Crust</th>
+<th>Price</th>
+<th>Filling</th>
+<th>Price</th>
+<th>Topping</th>
+<th>Price</th>
+</tr>
+<tr>
+<td>Hard</td><td>10</td><td>Chicken Tikka</td><td>120</td><td>Cucumber</td><td>25</td>
+</tr>
+<tr>
+<td>Thin</td><td>10</td><td>Panner Tikka</td><td>100</td><td>Tomato(or)Cabbage</td><td>20</td>
+</tr>
+<tr>
+<td>soft</td><td>12</td><td>Turkey Tikka</td><td>130</td><td>Meat Strip</td><td>45</td>
+</tr>
+</table>
+<button id="burgerOfTheDay" type="button"  class="btn btn-primary">Burger Of The Day</button>
+<button id="ownBurger" type="button" class="btn btn-success">Own Burger</button>
+
+<div style="padding:30px 30px;">
+
+
+<button id="non-veg" style="display:none;"  class="btn btn-warning">Non-Veg</button>
+<button id="veg" style="display:none;" class="btn btn-info">Veg</button>
+</div>
+</div>
+<div class="h-50 d-inline-block"></div>
+
+<div id="ownContent" style="display:none;" class="container">
+<div class="dropdown">
+<lable style="font-size:20px;"><b>Crust  : </b></lable>
+<select  id="crust" class="btn btn-secondary">
+<option value="Hard">Hard</option>
+<option value="Thin">Thin</option>
+<option value="Soft">Soft</option>
+</select>
+</div>
+<div class="h-50 d-inline-block"></div>
+<div>
+<lable style="font-size:20px;"><b>Filling  : </b></lable>
+<select  id="filling" class="btn btn-secondary">
+<option value="ChickenTikka">Chicken Tikka</option>
+<option value="PannerTikka">Panner Tikka</option>
+<option value="TurkeyTikka">Turkey Tikka</option>
+</select>
+</div>
+<div class="h-50 d-inline-block"></div>
+<div id="checking">
+<lable style="font-size:20px;"><b>Tobbings  : </b></lable>
+<lable style="font-size:20px;">Cucumber : </lable>
+<input type="checkbox" value="Cucumber" class="checkControl" name="checkType">
+<lable style="font-size:20px;">Tomato : </lable>
+<input type="checkbox" value="Tomato" class="checkControl" name="checkType">
+<lable style="font-size:20px;">MeatStrip : </lable>
+<input type="checkbox" value="MeatStrip" class="checkControl"name="checkType">
+<lable style="font-size:20px;">Cabbage : </lable>
+<input type="checkbox" value="Cabbage" class="checkControl" name="checkType">
+</div>
+<div style="padding:20px 20px;">
+<button id="order" type="button"  class="btn btn-danger">Order</button>
+</div>
+</div>
+<div id="ownContentVeg" style="display:none;">
+<div class="dropdown">
+<lable style="font-size:20px;"><b>Crust  : </b></lable>
+<select  id="crust" class="btn btn-secondary">
+<option value="Hard">Hard</option>
+<option value="Thin">Thin</option>
+<option value="Soft">Soft</option>
+</select>
+</div>
+<div class="h-50 d-inline-block"></div>
+<div>
+<lable style="font-size:20px;"><b>Filling  : </b></lable>
+<select  id="filling" class="btn btn-secondary">
+<option value="PannerTikka">Panner Tikka</option>
+</select>
+</div>
+<div class="h-50 d-inline-block"></div>
+<div id="checking">
+<lable style="font-size:20px;"><b>Tobbings  : </b></lable>
+<lable style="font-size:20px;">Cucumber : </lable>
+<input type="checkbox" value="Cucumber" class="checkControl" name="checkType">
+<lable style="font-size:20px;">Tomato : </lable>
+<input type="checkbox" value="Tomato" class="checkControl" name="checkType">
+<lable style="font-size:20px;">Cabbage : </lable>
+<input type="checkbox" value="Cabbage" class="checkControl" name="checkType">
+</div>
+<div style="padding:20px 20px;">
+<button id="orderVeg" type="button"  class="btn btn-danger">Order</button>
+</div>
+</div>
+</div>
+<div class="container">
+<div id="burger" style="display:none;">
+<p style="font-size:100px;">	
+&#127828;</p>
+<p id="test" style="font-size:20px;">	
+</p>
+</div>
+</div>
+</body>
+</html>
